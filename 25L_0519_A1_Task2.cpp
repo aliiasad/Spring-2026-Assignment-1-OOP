@@ -17,9 +17,9 @@ int main() {
     int numOfStudents = 0;
     input(numOfStudents);
 
-    char**   names   = new char*  [numOfStudents];
+    char** names   = new char*  [numOfStudents];
     double** scores  = new double*[numOfStudents];
-    int*     attemps = new int    [numOfStudents];
+    int* attemps = new int[numOfStudents];
 
     for (int i = 0; i < numOfStudents; i++) {
         char tempname[1000];
@@ -29,14 +29,19 @@ int main() {
         cin.getline(tempname, 1000);
         bool validName = false;
         for (int k = 0; k < sizeOfString(tempname); k++) {
-            if (*(tempname + k) != ' ') { validName = true; break; }
+            if (*(tempname + k) != ' ') { 
+                validName = true; break; 
+            }
         }
         while (!validName) {
             cout << "Invalid. Name: ";
             cin.getline(tempname, 1000);
             validName = false;
             for (int k = 0; k < sizeOfString(tempname); k++) {
-                if (*(tempname + k) != ' ') { validName = true; break; }
+                if (*(tempname + k) != ' ') { 
+                    validName = true; 
+                    break; 
+                }
             }
         }
 
@@ -135,19 +140,14 @@ double averageOfScores(double** scores, int* attemps, int i) {
 
 void calculateAndDisplayResults(char** names, double** scores, int* attemps, int numOfStudents) {
     cout << "\n--------------------------------------------\n";
-    cout << left << setw(20) << "Name"
-                 << setw(12) << "Average"
-                 << setw(12) << "Best" << "\n";
+    cout << left << setw(20) << "Name" << setw(15) << "Average" << setw(15) << "Best" << "\n";
     cout << "--------------------------------------------\n";
 
     for (int i = 0; i < numOfStudents; i++) {
         double avg  = averageOfScores(scores, attemps, i);
         double best = bestScore(scores, attemps, i);
 
-        cout << left  << setw(20) << *(names + i)
-             << fixed << setprecision(2)
-             << setw(12) << avg
-             << setw(12) << best << "\n";
+        cout << left  << setw(20) << *(names + i) << fixed << setprecision(2) << setw(15) << avg << setw(15) << best << "\n";
     }
 
     cout << "--------------------------------------------\n\n";
@@ -156,8 +156,8 @@ void calculateAndDisplayResults(char** names, double** scores, int* attemps, int
 bool appendScores(int choice, int numOfStudents, int* attemps, double** scores) {
     if (choice != 1) return false;
 
-    int    studentIndex = -1;
-    double newScore     = 0;
+    int studentIndex = -1;
+    double newScore = 0;
 
     cout << "Student index (0 to " << numOfStudents - 1 << "): ";
     while (!(cin >> studentIndex) || studentIndex < 0 || studentIndex >= numOfStudents) {
